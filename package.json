@@ -1,0 +1,24 @@
+{
+  "name": "similar-react-native-router",
+  "version": "0.0.1",
+  "description": "similar react-native-router",
+  "main": "react-native-router.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuhong1happy/similar-react-native-router.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-router"
+  ],
+  "author": "Holly Liu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liuhong1happy/similar-react-native-router/issues"
+  },
+  "homepage": "https://github.com/liuhong1happy/similar-react-native-router#readme"
+}
