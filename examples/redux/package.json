@@ -8,13 +8,18 @@
 	},
 	"dependencies": {
 		"react": "15.4.1",
-		"react-native": "0.39.2"
+		"react-native": "0.39.2",
+		"react-redux": "^4.4.6",
+		"redux": "^3.5.2",
+		"redux-actions": "^0.11.0",
+		"redux-thunk": "^1.0.0"
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",
 		"babel-preset-react-native": "1.9.1",
 		"jest": "18.0.0",
-		"react-test-renderer": "15.4.1"
+		"react-test-renderer": "15.4.1",
+		"redux-logger": "^2.6.1"
 	},
 	"jest": {
 		"preset": "react-native"

@@ -182,12 +182,14 @@ class Router extends React.Component{
   }
   render() {     
     return (
-      <Navigator ref="navigator" initialRoute={{name:this.props.defaultRoute,index:0}} configureScene={this._handleConfigureScene} renderScene={this._handleHashChange}>
+      <Navigator ref="navigator" initialRoute={{name:this.props.defaultRoute,index:0}} 
+		configureScene={this._handleConfigureScene.bind(this)} 
+		renderScene={this._handleHashChange.bind(this)}>
       </Navigator>
     );
   }
 };
-const Route = ()=>{ return (<View></View>)};
+const Route = ()=><View></View>;
 class Link extends React.Component{
     handlePress(e){
 		// 先 生效点击事件

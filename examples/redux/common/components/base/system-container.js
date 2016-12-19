@@ -3,20 +3,19 @@ const React = require('react');
 const {
   StyleSheet,
   View,
-  Platform,
   Image
 } = require('react-native');
     
-const Dimensions = require('./react-native-dimensions');
+const Dimensions = require('../../utils/Dimensions');
 const Platform = require('./react-native-platform');
 
-const SystemContainer = (props)=> <View style={[styles.system,props.style]}> {props.children} </View>
+const SystemContainer = (props)=> <View style={[styles.system,props.style]}>{props.children}</View>
         
 const ContentContainer = (props)=> <View style={[styles.content,props.style]}>{props.children}</View>
 
 const RowContainer = (props)=> <View style={[styles.row,props.style]}>{props.children}</View>
 
-const Splitter = (props)=> <View style={[styles.splitter,props.style]}> {props.children}</View>
+const Splitter = (props)=> <View style={[styles.splitter,props.style]}>{props.children}</View>
         
 const styles = StyleSheet.create({
     system:{

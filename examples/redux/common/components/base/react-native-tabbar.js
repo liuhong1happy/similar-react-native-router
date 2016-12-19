@@ -7,7 +7,7 @@ const {
   TouchableOpacity,
   StyleSheet
 } = require('react-native');
-const Dimensions = require('./react-native-dimensions');
+const Dimensions = require('../../utils/Dimensions');
 const {height, width} = Dimensions.get('window');
 
 const Utils = {
@@ -66,7 +66,7 @@ class Tab extends React.Component{
     render(){
         var { title } = this.props; 
         var icon = this.genIcon();
-        return (<TouchableOpacity style={styles.tab} onPress={this.onPress}>
+        return (<TouchableOpacity style={styles.tab} onPress={this.onPress.bind(this)}>
                         <View style={styles.nav}>
                             <View style={styles.iconRow}>
                                 {icon}
@@ -88,11 +88,11 @@ Tab.defaultProps = {
 	defaultColor: "#999999",
 	selectedColor: "#4590a9"
 }
-  
+
 const styles = StyleSheet.create({
     nav:{
         alignItems:"center",
-        paddingTop: Dimensions.getSize(2)
+		height: Dimensions.tabBarHeight
     },
     tabbar:{
         position:"absolute",
@@ -103,28 +103,26 @@ const styles = StyleSheet.create({
         justifyContent:"space-around",// 水平方向
         alignItems:"center",
         width:width,
-        borderTopColor:"#d8d8d8",
-        borderTopWidth:0.5,
-        borderStyle:"solid",
-		height:Dimensions.tabBarHeight
+		height: Dimensions.tabBarHeight
     },
     tab:{
-        flex:1
+        flex:1,
+		height: Dimensions.tabBarHeight
     },
 	iconRow:{
 		flexDirection:"row",
-		justifyContent:"center"
+		justifyContent:"center",
+		height: Dimensions.getHeight(12)
 	},
     systemIcon:{
-        fontSize:Dimensions.getSize(7),
+        fontSize:Dimensions.getSize(8),
         textAlign:"center",
-        marginTop:Dimensions.getSize(2),
-        lineHeight:Dimensions.getHeight(10),
+        lineHeight:Dimensions.getHeight(12),
         textAlignVertical:"center"
     },
     labelRow:{
-        marginBottom:Dimensions.getSize(2)
-    },
+		height: Dimensions.getHeight(6)
+	},
     label:{
         fontSize:Dimensions.getSize(4),
         color:"#282828",

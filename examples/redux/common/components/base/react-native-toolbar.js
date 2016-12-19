@@ -7,9 +7,8 @@ const {
     StyleSheet,
 	StatusBar
 } = require('react-native');
-const Dimensions = require('./react-native-dimensions');
+const Dimensions = require('../../utils/Dimensions');
 const {height, width} = Dimensions.get('window');
-const colorUtils = require('../../utils/color-utils')
 const {TouchableOpacity} = require('./react-native-form');
 // navIcon,logo,title,titleColor,subtitle,subtitleColor,actions
 // name title icon show showWithText
@@ -30,7 +29,7 @@ class ActionButton extends React.Component{
         var img = this.genImage();
         return (<TouchableOpacity onPress={this.onPress.bind(this)} style={ [styles.button,{"width":this.props.width,"marginLeft":this.props.marginLeft} ]}>
                         {img}
-                        <Text style={{color:"#fff",fontSize:Dimensions.size["6"]}}>{this.props.title}</Text>
+                        <Text style={{color:"#fff",fontSize:Dimensions.getSize(6)}}>{this.props.title}</Text>
                 </TouchableOpacity>)
     }
 }
@@ -105,9 +104,9 @@ class ToolBar extends React.Component{
 		var actions = this.props.actions?this.props.actions:[];
 		var navIcon = this.props.navIcon?this.props.navIcon:{};
 		var logo = this.props.logo?this.props.logo:{};
-        return (<View style={[styles.toolbar,colorUtils.toolbar]}>
+        return (<View style={[styles.toolbar]}>
 							<StatusBar hidden={false} barStyle="light-content"/>
-                            <View style={[styles.item,styles.actions,{justifyContent:"flex-start",marginLeft:Dimensions.size["4"]}]}>
+                            <View style={[styles.item,styles.actions,{justifyContent:"flex-start",marginLeft:Dimensions.getSize(4) }]}>
                                 <ActionButton icon={navIcon.icon} title={navIcon.title} name={navIcon.name} width={navIcon.width} onPress={this.onNavIconPress.bind(this)}/>
                                 <ActionButton icon={logo.icon} title={logo.title} name={logo.name} width={navIcon.width}  onPress={this.onLogoPress.bind(this)}/>
                             </View>
@@ -115,12 +114,12 @@ class ToolBar extends React.Component{
                                 { title }
                                 { subtitle }
                             </View>
-                            <View style={[styles.item,styles.actions,{justifyContent:"flex-end",marginRight:Dimensions.size["4"]}]}>
+                            <View style={[styles.item,styles.actions,{justifyContent:"flex-end",marginRight:Dimensions.getSize(4)}]}>
                                 {
                                     actions.map(function(action,pos){
                                         action.onPress = onActionPress;
                                         action.key = pos;
-										action.marginLeft = Dimensions.size["6"];
+										action.marginLeft = Dimensions.getSize(6);
                                         return React.createElement(ActionButton,action,null);
                                     })
                                 }
@@ -149,20 +148,20 @@ const styles = StyleSheet.create({
     titles:{
         flexDirection:"column",
         justifyContent:"space-around",
-        marginTop:Dimensions.statusBarHeight + Dimensions.size["2"],
-        marginBottom:Dimensions.size["2"],
+        marginTop:Dimensions.statusBarHeight + Dimensions.getSize(2),
+        marginBottom:Dimensions.getSize(2),
         alignItems:"center"
     },
     title:{
         flex:1,
         color:"#fff",
-        fontSize:Dimensions.size["7"],
+        fontSize:Dimensions.getSize(7),
         textAlign:"center"
     },
     subtitle:{
         flex:1,
         color:"#fff",
-        fontSize:Dimensions.size["7"],
+        fontSize:Dimensions.getSize(7),
         textAlign:"center"
     },
     actions:{
@@ -176,8 +175,8 @@ const styles = StyleSheet.create({
         flex:0
     },
 	actionImg:{
-		width:Dimensions.size["12"],
-		height:Dimensions.size["12"]
+		width:Dimensions.getSize(12),
+		height:Dimensions.getSize(12)
 	}
 });
 module.exports = ToolBar;

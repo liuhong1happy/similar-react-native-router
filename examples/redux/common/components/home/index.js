@@ -8,6 +8,9 @@ const {
 
 const { SystemContainer } = require('../base/system-container')
 
-const HomeView  = (props)=> <SystemContainer> {props.children} </SystemContainer>  
+const HomeView  = (props)=> 
+	<SystemContainer>
+		{props.children}
+	</SystemContainer>
 
 module.exports = HomeView;

@@ -1,4 +1,4 @@
-const STUDENT_URL = 'http://testedu.idealsee.com';
+const SERVER_URL = '';
 
 const Ajax = function(options){
 	let formData = null;
@@ -36,7 +36,7 @@ const Ajax = function(options){
 	   }
     }
 
-    fetch(STUDENT_URL+options.url,{
+    fetch(SERVER_URL+options.url,{
         method:options.type,
         body:formData,
     })
@@ -58,6 +58,6 @@ module.exports = function(options){
 	  options.url = options.url || "/api/url";
 	  options.type = options.type || "get";
 	  options.success = options.success || function(e){};
-	  options.error = options.error || function(e, err){};
+	  options.error = options.error || function(e, msg){};
 	  Ajax(options);
 }

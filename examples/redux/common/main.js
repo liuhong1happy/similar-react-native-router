@@ -5,6 +5,9 @@ const {Provider} = require('react-redux');
 
 const store = require('./store/configureStore')
 
-const MainApp = ()=> <Provider store={store} > <RouterApp /> </Provider>
+const MainApp = ()=> 
+	<Provider store={store} >
+		<RouterApp />
+	</Provider>
 	
 module.exports = MainApp;
