@@ -1,4 +1,4 @@
-const SERVER_URL = 'https://github.com/liuhong1happy/similar-react-native-router/examples/';
+const SERVER_URL = 'https://raw.githubusercontent.com/liuhong1happy/similar-react-native-router/master/examples/redux/common';
 
 const Ajax = function(options){
 	let formData = null;
