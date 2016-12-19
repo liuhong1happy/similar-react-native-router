@@ -1,4 +1,4 @@
-const SERVER_URL = '';
+const SERVER_URL = 'https://github.com/liuhong1happy/similar-react-native-router/examples/';
 
 const Ajax = function(options){
 	let formData = null;
