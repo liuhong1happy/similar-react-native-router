@@ -89,8 +89,10 @@ const RouterUtils = {
 class Router extends React.Component{
   constructor(props){
 		super(props)
+		let defaultRoute = props.defaultRoute || "/";
+	    RouteHistory.curRoute.name = defaultRoute;
 		this.state = { 
-			location: props.defaultRoute ?props.defaultRoute:"/",
+			location:  defaultRoute,
 			routes:null,
 			components:null,
 		};

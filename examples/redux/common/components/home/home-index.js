@@ -3,7 +3,8 @@ const React = require('react');
 const {
     View,
 	Text,
-	ScrollView
+	ScrollView,
+	Alert
 } = require('react-native');
 
 const TabBars = require('../base/tabbars');
@@ -26,8 +27,9 @@ const mapStateToProps = function(state){
 
 class HomeIndexView extends React.Component{
 	componentDidMount(){
-		var {fetchUserInfo} = this.props;
+		let {fetchUserInfo,page} = this.props;
 		fetchUserInfo();
+		Alert.alert("提示",page,[{text: '确定', onPress: () => {}}]);
 	}
 	render(){
 		return <ContentContainer>
@@ -37,7 +39,7 @@ class HomeIndexView extends React.Component{
 							<Text>{"This is page "+this.props.page+"!"}</Text>
 						</View>
 						<View>
-							<Text>{"Current route is  "+RouteHistory.curRoute.hash+"!"}</Text>
+							<Text>{"Current route is  "+RouteHistory.curRoute.name+"!"}</Text>
 						</View>
 					</ScrollView>
 					<TabBars />

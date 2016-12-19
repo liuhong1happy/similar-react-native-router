@@ -8,7 +8,7 @@ module.exports = function(state = userPage,action){
 	const {type, payload} = action;
 	switch(type){
 		case types.userPage.POST_USER_LOGIN:
-			return { ...state, pages: payload.data.pages };
+			return { ...state, redirect: payload.data.redirect };
 		default:
 			return state;
 	}

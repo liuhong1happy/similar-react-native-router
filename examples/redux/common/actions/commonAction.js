@@ -5,7 +5,7 @@ const types = require('../constants/ActionTypes');
 const SceneConfigs = require('../constants/SceneConfigs');
 
 const fetchMsgAction = function(payload){
-	Alert.alert(payload);
+	Alert.alert("提示",payload,[{text: '确定', onPress: () => {}}]);
 	return {type: types.common.FETCH_MSG, payload}
 }
 

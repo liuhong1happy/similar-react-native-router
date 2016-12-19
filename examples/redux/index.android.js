@@ -3,7 +3,7 @@ const {
     AppRegistry
 } = require('react-native');
 
-const MainApp = require('./common/components/main');
+const MainApp = require('./common/main');
 
 const Application = ()=> <MainApp />
 

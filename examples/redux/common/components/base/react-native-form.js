@@ -44,8 +44,8 @@ class Button extends React.Component{
     }
     genImage(){
 		var {iconHeight,iconWidth} = this.props;
-		var height = iconHeight? iconHeight :Dimensions.size["16"];
-		var width = iconWidth? iconWidth:Dimensions.size["16"];
+		var height = iconHeight? iconHeight :Dimensions.getSize(16);
+		var width = iconWidth? iconWidth:Dimensions.getSize(16);
         if(this.props.icon){
             return (<View style={{height:height,width:width}}><Image source={this.props.icon} style={[styles.buttonImg,{height:height,width:width},this.props.imgStyle]} /></View>)
         }else{
@@ -56,10 +56,10 @@ class Button extends React.Component{
         var img = this.genImage();
 		var {title,style,icon,onPress,name,titleStyle,imgStyle,textAlign,underlayColor,...props} = this.props;
 		 var _style = StyleSheet.flatten(style);
-		var height = _style && _style.height?_style.height :Dimensions.size["16"];
+		var height = _style && _style.height?_style.height :Dimensions.getSize(16);
 		var screenWidth = _style && _style.width?_style.width : Dimensions.screenWidth;
-		var _imgStyle = icon?{width:Dimensions.size["12"],height:Dimensions.size["12"]}:{height:0,width:0};
-		var textWidth  =  screenWidth - _imgStyle.width -Dimensions.size["4"]*2;
+		var _imgStyle = icon?{width:Dimensions.getSize(12),height:Dimensions.getSize(12)}:{height:0,width:0};
+		var textWidth  =  screenWidth - _imgStyle.width - Dimensions.getSize(8);
 		var textStyle = Platform.isIOS ?[styles.buttonText,titleStyle] : [styles.buttonText,{lineHeight:height},titleStyle];
 		var _underlayColor=underlayColor?underlayColor:"transparent";
         return (<NewTouchableHighlight underlayColor={_underlayColor} onPress={this.onPress.bind(this)}>

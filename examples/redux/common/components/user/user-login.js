@@ -14,6 +14,7 @@ const { Button,TextInput } = require('../base/react-native-form');
 const Dimensions = require('../../utils/Dimensions');
 const UserPageAction = require('../../actions/userPage');
 const { connect } = require('react-redux'); 
+const { bindActionCreators } = require('redux');
 
 const mapDispatchToProps = function(dispatch){
 	return bindActionCreators(UserPageAction,dispatch);
@@ -23,7 +24,7 @@ class UserLoginView extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			form_data:""
+			form_data: {}
 		}
 	}
     handleTextChange(name,text){
@@ -99,4 +100,4 @@ const styles = StyleSheet.create({
   }
 })
 
-module.exports = connect(mapDispatchToProps)(UserLoginView);
+module.exports = connect(undefined,mapDispatchToProps)(UserLoginView);

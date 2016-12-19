@@ -25,7 +25,7 @@ const styles = {
 class RouterApp extends React.Component {
 	render(){
 		return (
-			<Router defaultRoute="/home/index" path="/" component={MainApp}>
+			<Router defaultRoute="/user/welcome" path="/" component={MainApp}>
 				<Route path="home" component={HomePage}>
 					<Route path="index" component={HomeIndexPage} />
 					<Route path="page/:index" component={HomeIndexPage} />
