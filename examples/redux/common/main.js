@@ -1,13 +1,11 @@
-const React = require('react');
-const RouterApp = require('./router');
+import React from 'react';
+import { Provider } from 'react-redux';
+import RouterApp from './router';
+import store from './store/configureStore';
 
-const {Provider} = require('react-redux');
+const MainApp = () =>
+  <Provider store={store} >
+    <RouterApp />
+  </Provider>;
 
-const store = require('./store/configureStore')
-
-const MainApp = ()=> 
-	<Provider store={store} >
-		<RouterApp />
-	</Provider>
-	
 module.exports = MainApp;

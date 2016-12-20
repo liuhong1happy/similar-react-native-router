@@ -1,6 +1,6 @@
 module.exports = {
-	pushRoute: "pushRoute",
-	resetToRoute: "resetToRoute",
-	popRoute: "popRoute",
-	popToRoute: "popToRoute"
-}
+  pushRoute: "pushRoute",
+  resetToRoute: "resetToRoute",
+  popRoute: "popRoute",
+  popToRoute: "popToRoute"
+};

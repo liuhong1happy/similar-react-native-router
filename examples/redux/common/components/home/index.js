@@ -1,16 +1,10 @@
-const React = require('react');
-const {
-  View,
-  Text,
-  Navigator,
-  StyleSheet
-} = require('react-native');
+import React from 'react';
 
-const { SystemContainer } = require('../base/system-container')
+const { SystemContainer } = require('../base/system-container');
 
-const HomeView  = (props)=> 
-	<SystemContainer>
-		{props.children}
-	</SystemContainer>
+const HomeView = props =>
+  <SystemContainer>
+    {props.children}
+  </SystemContainer>;
 
 module.exports = HomeView;

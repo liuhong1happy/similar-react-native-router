@@ -1,103 +1,105 @@
-const React = require('react');
-const {
-    ListView,
-    View,
-	RecyclerViewBackedScrollView,
-	StyleSheet,
-    Alert,
-	StatusBar
-} = require('react-native');
-const TabBars = require('../base/tabbars');
-const {ContentContainer,RowContainer}  = require('../base/system-container')
-const ToolBar = require('../base/react-native-toolbar');
-const { Button,TextInput } = require('../base/react-native-form');
-const Dimensions = require('../../utils/Dimensions');
-const UserPageAction = require('../../actions/userPage');
-const { connect } = require('react-redux'); 
-const { bindActionCreators } = require('redux');
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+  Alert
+} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ContentContainer, RowContainer } from '../base/system-container';
+import ToolBar from '../base/react-native-toolbar';
+import { Button, TextInput } from '../base/react-native-form';
+import Dimensions from '../../utils/Dimensions';
+import UserPageAction from '../../actions/userPage';
 
-const mapDispatchToProps = function(dispatch){
-	return bindActionCreators(UserPageAction,dispatch);
-}
+const mapDispatchToProps = function (dispatch) {
+  return bindActionCreators(UserPageAction, dispatch);
+};
 
-class UserLoginView extends React.Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			form_data: {}
-		}
-	}
-    handleTextChange(name,text){
-        var form_data = this.state.form_data;
-        form_data[name] = text;
-        this.setState({
-            form_data:form_data
-        })
-    }
-    handleUserLogin(){
-        var form_data = this.state.form_data;
+class UserLoginView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      form_data: {}
+    };
+  }
+  handleTextChange(name, text) {
+    const formData = this.state.form_data;
+    formData[name] = text;
+    this.setState({
+      form_data:formData
+    });
+  }
+  handleUserLogin() {
+    const formData = this.state.form_data;
         // 校验表单
-        if(!form_data.username){
-            Alert.alert("提示","请输入用户名",[{text: '确定', onPress: () => {}}]);
-            return;
-        }
-        if(!form_data.password){
-            Alert.alert("提示","请输入密码",[{text: '确定', onPress: () => {}}]);
-            return;
-        }
-		const { userLogin } = this.props;
-        userLogin(form_data);
+    if (!formData.username) {
+      Alert.alert("提示", "请输入用户名", [{ text: '确定', onPress: () => {} }]);
+      return;
     }
-    render(){
-        var form_data = this.state.form_data;
-        return (<ContentContainer>
-                        <ToolBar title="登录"></ToolBar>
-                        <RowContainer style={styles.RowContainer}>
-                            <View style={styles.inputView}>
-                                <TextInput name="username" placeholder="请输入用户名" style={styles.input} value={form_data.username} onChangeText={this.handleTextChange.bind(this)}></TextInput> 
-                            </View>
-                            <View style={styles.blank}></View>
-                            <View style={styles.inputView}>
-                                <TextInput name="password" placeholder="请输入密码" style={styles.input} secureTextEntry={true} value={form_data.password}  onChangeText={this.handleTextChange.bind(this)} maxLength={16}></TextInput> 
-                            </View>
-                        </RowContainer>
-                        <Button title="登陆" style={styles.button} textAlign="center" onPress={this.handleUserLogin.bind(this)}></Button>	  	
-                   </ContentContainer>)
+    if (!formData.password) {
+      Alert.alert("提示", "请输入密码", [{ text: '确定', onPress: () => {} }]);
+      return;
     }
+    const { userLogin } = this.props;
+    userLogin(formData);
+  }
+  render() {
+    const formData = this.state.form_data;
+    return (<ContentContainer>
+      <ToolBar title="登录" />
+      <RowContainer style={styles.row}>
+        <View style={styles.inputView}>
+          <TextInput
+            name="username" placeholder="请输入用户名" style={styles.input}
+            value={formData.username} onChangeText={this.handleTextChange.bind(this)}
+          />
+        </View>
+        <View style={styles.blank} />
+        <View style={styles.inputView}>
+          <TextInput
+            name="password" placeholder="请输入密码" style={styles.input} secureTextEntry
+            value={formData.password} onChangeText={this.handleTextChange.bind(this)} maxLength={16}
+          />
+        </View>
+      </RowContainer>
+      <Button title="登陆" style={styles.button} textAlign="center" onPress={this.handleUserLogin.bind(this)} />
+    </ContentContainer>);
+  }
 }
 
 const styles = StyleSheet.create({
-  RowContainer:{
-      marginTop: Dimensions.getSize(4)
+  row:{
+    marginTop: Dimensions.getSize(4)
   },
   blank:{
-      marginLeft:Dimensions.getSize(2),
-      marginRight:Dimensions.getSize(2),
-      backgroundColor:"#ddd",
-      height:1
+    marginLeft:Dimensions.getSize(2),
+    marginRight:Dimensions.getSize(2),
+    backgroundColor:"#ddd",
+    height:1
   },
   inputView:{
-      height:Dimensions.getSize(16),
-      width:Dimensions.screenWidth,
-      borderColor: "#ddd"
+    height:Dimensions.getSize(16),
+    width:Dimensions.screenWidth,
+    borderColor: "#ddd"
   },
   input:{
-      height:Dimensions.getSize(16),
-      width:Dimensions.screenWidth-Dimensions.getSize(6),
-      fontSize:Dimensions.getSize(5)
+    height:Dimensions.getSize(16),
+    width:Dimensions.screenWidth - Dimensions.getSize(6),
+    fontSize:Dimensions.getSize(5)
   },
   button:{
-      width:Dimensions.screenWidth-Dimensions.getSize(12),
-      height:Dimensions.getSize(16),
-      backgroundColor:"#74C93C",
-      borderBottomLeftRadius:Dimensions.getSize(2),
-      borderBottomRightRadius:Dimensions.getSize(2),
-      borderTopLeftRadius:Dimensions.getSize(2),
-      borderTopRightRadius:Dimensions.getSize(2),
-      marginTop:Dimensions.getSize(6),
-      marginLeft:Dimensions.getSize(6),
-      marginRight:Dimensions.getSize(6)
+    width:Dimensions.screenWidth - Dimensions.getSize(12),
+    height:Dimensions.getSize(16),
+    backgroundColor:"#74C93C",
+    borderBottomLeftRadius:Dimensions.getSize(2),
+    borderBottomRightRadius:Dimensions.getSize(2),
+    borderTopLeftRadius:Dimensions.getSize(2),
+    borderTopRightRadius:Dimensions.getSize(2),
+    marginTop:Dimensions.getSize(6),
+    marginLeft:Dimensions.getSize(6),
+    marginRight:Dimensions.getSize(6)
   }
-})
+});
 
-module.exports = connect(undefined,mapDispatchToProps)(UserLoginView);
+module.exports = connect(undefined, mapDispatchToProps)(UserLoginView);
