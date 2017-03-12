@@ -3,16 +3,16 @@ import {View,Text,Navigator,TouchableOpacity} from 'react-native';
 
 const navigator = null;
 const defaultConfig = Navigator.SceneConfigs.FadeAndroid;
-const RouteHistory = {
+export const RouteHistory = {
     routeTable:[],
     curRoute:{index:0,name:"/user/welcome",config:defaultConfig},
     // 修改当前路由，不适合后退页面，适合平行页面之间跳跃
-    pushRoute:function(name,index,config){
+    pushRoute(name,index,config){
         index = index?index:0;
 		config = config?config:defaultConfig;
         this.routeTable = navigator.getCurrentRoutes();
         this.curRoute = { name:name, index:index, config:config };
-		var existRoutes = this.routeTable.filter(function(ele,pos){ return ele.name==name });
+		const existRoutes = this.routeTable.filter(function(ele,pos){ return ele.name==name });
 		
         if(navigator){
 			if(existRoutes.length>0){
@@ -25,7 +25,7 @@ const RouteHistory = {
         }
     },
     // 重置route，适合首次初始化的时候
-    resetToRoute:function(name,index,config){
+    resetToRoute(name,index,config){
         index = index?index:0;
 		config = config?config:defaultConfig;
         this.routeTable = [];
@@ -37,13 +37,13 @@ const RouteHistory = {
         }
     },
     // 后退到上一级
-    popRoute:function(){
+    popRoute(){
         if(navigator){
             navigator.pop();
         }
     },
     // 后退多级
-    popToRoute:function(name){
+    popToRoute(name){
         let routes = navigator.getCurrentRoutes();
         let existRoutes = routes.filter(function(ele,pos){ return ele.name==name });
         if(navigator && existRoutes.length>0){
@@ -52,19 +52,19 @@ const RouteHistory = {
     }
 };
 const RouterUtils = {
-    createRoute:function(element,parentProps){
-        var location=parentProps.location+"/"+element.props.path,
-            components=parentProps.components.concat([element.props.component]);
+    createRoute(element,parentProps){
+        const location=parentProps.location+"/"+element.props.path;
+        const components=parentProps.components.concat([element.props.component]);
         return {
             location:location,
             components: components
         }
     },
-    createRoutesByPropsChildren:function(children,parentProps){
-        var routes = new Array();
-        for(var i=0;i<children.length;i++){
-            var element = children[i];
-            var route = this.createRoute(element,parentProps)
+    createRoutesByPropsChildren(children,parentProps){
+        const routes = [];
+        for(let i=0;i<children.length;i++){
+            const element = children[i];
+            const route = this.createRoute(element,parentProps)
             
             if(element.props.children instanceof Array){
                 route.routes = this.createRoutesByPropsChildren(element.props.children, route)
@@ -77,16 +77,16 @@ const RouterUtils = {
          
         return routes;
     },
-    createRoutes:function(parentProps){
-            var parentRoute = {
-                components:[parentProps.component],
-                location:""
-            }
-            parentRoute.routes = this.createRoutesByPropsChildren(parentProps.children,parentRoute);
-            return parentRoute;
+    createRoutes(parentProps){
+        const parentRoute = {
+            components:[parentProps.component],
+            location:""
+        }
+        parentRoute.routes = this.createRoutesByPropsChildren(parentProps.children,parentRoute);
+        return parentRoute;
     }
 };
-class Router extends React.Component{
+export class Router extends React.Component{
   constructor(props){
 		super(props)
 		this.state = { 
@@ -96,8 +96,8 @@ class Router extends React.Component{
 		};
 	}
   componentWillMount(){
-      var routes = RouterUtils.createRoutes(this.props);
-      var components = this._parseHash(routes,this.state.location);
+      const routes = RouterUtils.createRoutes(this.props);
+      const components = this._parseHash(routes,this.state.location);
       this.setState({
           routes:routes,
           components:components
@@ -111,18 +111,18 @@ class Router extends React.Component{
       window.removeEventListener("hashchange",this._handleHashChange)
   }
   _matchLocation(_location,hash){
-      var locations = _location.split("/");
-      var hashs = hash.split("/");
-      var props = { location:hash }
+      const locations = _location.split("/");
+      const hashs = hash.split("/");
+      const props = { location:hash }
       if(locations.length==hashs.length){
-           var results = locations.filter(function(ele,pos){
-               var _hash = hashs[pos];
+           const results = locations.filter(function(ele,pos){
+               const _hash = hashs[pos];
                if(_hash.indexOf("?")!=-1){
-                    var _hashs = _hash.split("?");
+                    const _hashs = _hash.split("?");
                     hashs[pos] = _hashs[0];
-                    var eles = _hashs[1].split("&");
-                    for(var i=0;i<eles.length;i++){
-                        var objs = eles[i].split("=");
+                    const eles = _hashs[1].split("&");
+                    for(let i=0;i<eles.length;i++){
+                        const objs = eles[i].split("=");
                         props[objs[0]] = objs[1];
                     }
                }
@@ -138,9 +138,9 @@ class Router extends React.Component{
       return null;
   }
   _parseHashByRoutes(routes,hash){
-     for(var i=0;i<routes.length;i++){
-         var route = routes[i];
-         var props = this._matchLocation(route.location,hash);
+     for(let i=0;i<routes.length;i++){
+         const route = routes[i];
+         const props = this._matchLocation(route.location,hash);
          if(props){
              route.props = props;
              return route;
@@ -153,14 +153,14 @@ class Router extends React.Component{
      return null;
   }
   _parseHash(routes,hash){
-      var route = this._parseHashByRoutes(routes.routes,hash);
+      const route = this._parseHashByRoutes(routes.routes,hash);
       if(route==null) return (<Text>404</Text>);
       return this._createElementByComponents(route.components,route.props);
    }
     _createElementByComponent(component,components,props){
         if(components.length>1){
-            var _components = components.filter(function(ele,pos){return pos>0});
-            var child = this._createElementByComponent(_components[0], _components,props);
+            const _components = components.filter(function(ele,pos){return pos>0});
+            const child = this._createElementByComponent(_components[0], _components,props);
             return React.createElement(component,props,child);
         }else{
             return React.createElement(component,props,null);
@@ -170,8 +170,8 @@ class Router extends React.Component{
             return this._createElementByComponent(components[0],components,props)
     }
   _handleHashChange(route,navigator){
-      var hash = route.name;
-      var components = this._parseHash(this.state.routes,hash);
+      const hash = route.name;
+      const components = this._parseHash(this.state.routes,hash);
       return components;
   }
   _handleConfigureScene(route,routeStack){
@@ -182,13 +182,15 @@ class Router extends React.Component{
   }
   render() {     
     return (
-      <Navigator ref="navigator" initialRoute={{name:this.props.defaultRoute,index:0}} configureScene={this._handleConfigureScene} renderScene={this._handleHashChange}>
+      <Navigator ref="navigator" initialRoute={{name:this.props.defaultRoute,index:0}} 
+      configureScene={()=>this._handleConfigureScene(route,routeStack)} 
+      renderScene={(route,navigator)=>this._handleHashChange(route,navigator)}>
       </Navigator>
     );
   }
 };
-const Route = ()=>{ return (<View></View>)};
-class Link extends React.Component{
+export const Route = ()=>{ return (<View></View>)};
+export class Link extends React.Component{
     handlePress(e){
 		// 先 生效点击事件
         if(this.props.onPress){
@@ -200,7 +202,7 @@ class Link extends React.Component{
         RouteHistory.pushRoute(name,index,config);
     }
     render(){
-        return (<TouchableOpacity onPress={this.handlePress}>
+        return (<TouchableOpacity onPress={(e)=>this.handlePress(e)}>
 					<View style={this.props.style}>
 						{ this.props.children }
 					</View>
@@ -208,7 +210,10 @@ class Link extends React.Component{
     }
 };
  
-module.exports.Router = Router;
-module.exports.Route = Route;
-module.exports.Link = Link;
-module.exports.RouteHistory = RouteHistory;
+export default {
+    Router,
+    Route,
+    Link,
+    RouteHistory,
+}
+

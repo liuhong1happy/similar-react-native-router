@@ -1,6 +1,6 @@
 {
   "name": "similar-react-native-router",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "similar react-native-router",
   "main": "react-native-router.js",
   "scripts": {
